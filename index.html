@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Petrov Shop | Modern Premium Store</title>
+  <!-- Google Fonts & Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f8fafd;
+      color: #0f172a;
+      scroll-behavior: smooth;
+    }
+
+    /* Custom Scroll */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #e9eef3;
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+
+    /* Navbar */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(20px);
+      background: rgba(255, 255, 255, 0.92);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .nav-brand .brand-name {
+      font-size: 1.7rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #1e293b, #2d3a5e);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: -0.3px;
+    }
+    .nav-brand .tag {
+      font-size: 0.75rem;
+      background: #eef2ff;
+      padding: 4px 10px;
+      border-radius: 40px;
+      font-weight: 500;
+      color: #2c3e66;
+    }
+
+    .cart-icon {
+      position: relative;
+      cursor: pointer;
+      background: white;
+      padding: 10px 20px;
+      border-radius: 60px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+      border: 1px solid #eef2ff;
+    }
+    .cart-icon:hover {
+      background: #f1f5f9;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    }
+    .cart-icon i {
+      font-size: 1.2rem;
+      color: #1e2f47;
+    }
+    .cart-count {
+      background: #e11d48;
+      color: white;
+      border-radius: 50px;
+      padding: 2px 8px;
+      font-size: 0.7rem;
+      font-weight: bold;
+      margin-left: 4px;
+    }
+
+    /* ========== BANNER AREA (CUSTOM GAMBAR SENDIRI) ========== */
+    .hero-banner {
+      width: 100%;
+      background: linear-gradient(105deg, #f1f5f9 0%, #ffffff 100%);
+      position: relative;
+      padding: 0;
+      margin: 0;
+    }
+    .banner-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 1.5rem 2rem;
+    }
+    .custom-banner {
+      width: 100%;
+      border-radius: 32px;
+      overflow: hidden;
+      box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+      background: #eef2fa;
+      min-height: 240px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .custom-banner img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s;
+    }
+    .custom-banner:hover img {
+      transform: scale(1.01);
+    }
+    /* placeholder jika gambar belum diisi */
+    .banner-placeholder {
+      background: linear-gradient(145deg, #e0e8f3, #cdd9ed);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      padding: 3rem 2rem;
+      text-align: center;
+      color: #2c3e66;
+      font-weight: 500;
+    }
+    .banner-placeholder i {
+      font-size: 3rem;
+      opacity: 0.6;
+    }
+    .banner-placeholder p {
+      font-size: 0.9rem;
+      background: rgba(255,255,255,0.7);
+      padding: 6px 14px;
+      border-radius: 60px;
+    }
+    /* instruksi kecil */
+    .banner-note {
+      text-align: center;
+      margin-top: 0.6rem;
+      font-size: 0.7rem;
+      color: #5a6e8a;
+      background: #f1f5f9;
+      display: inline-block;
+      padding: 4px 14px;
+      border-radius: 50px;
+    }
+    /* Product Grid */
+    .container {
+      max-width: 1300px;
+      margin: 2rem auto 3rem;
+      padding: 0 1.5rem;
+    }
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 1.8rem;
+      letter-spacing: -0.3px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .section-title i {
+      color: #2c3e66;
+      font-size: 1.5rem;
+    }
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minfill(280px, 1fr));
+      gap: 2rem;
+    }
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    /* Card Produk */
+    .product-card {
+      background: white;
+      border-radius: 28px;
+      overflow: hidden;
+      transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
+      box-shadow: 0 12px 24px -12px rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(0, 0, 0, 0.03);
+    }
+    .product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 25px 35px -12px rgba(0, 0, 0, 0.15);
+    }
+    .product-img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      background: #f7f9fe;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+    .product-card:hover .product-img {
+      transform: scale(1.02);
+    }
+    .product-info {
+      padding: 1.4rem 1.2rem 1.2rem;
+    }
+    .product-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.2px;
+      margin-bottom: 0.4rem;
+    }
+    .product-price {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #1e2f47;
+      margin: 0.6rem 0;
+    }
+    .product-price small {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: #6c7e9e;
+    }
+    .product-desc {
+      font-size: 0.85rem;
+      color: #5a6e8a;
+      margin-bottom: 1.2rem;
+      line-height: 1.4;
+    }
+    .btn-add {
+      background: #1e2f47;
+      border: none;
+      width: 100%;
+      padding: 12px 0;
+      border-radius: 40px;
+      font-weight: 600;
+      color: white;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .btn-add:hover {
+      background: #0f1e32;
+      transform: scale(0.98);
+    }
+
+    /* Sidebar Keranjang */
+    .cart-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(5px);
+      z-index: 1000;
+      visibility: hidden;
+      opacity: 0;
+      transition: all 0.25s ease;
+    }
+    .cart-overlay.active {
+      visibility: visible;
+      opacity: 1;
+    }
+    .cart-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 90%;
+      max-width: 420px;
+      height: 100%;
+      background: white;
+      box-shadow: -10px 0 35px rgba(0, 0, 0, 0.1);
+      z-index: 1100;
+      transform: translateX(100%);
+      transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+    .cart-overlay.active .cart-drawer {
+      transform: translateX(0);
+    }
+    .cart-header {
+      padding: 1.5rem;
+      border-bottom: 1px solid #eef2f8;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 700;
+      font-size: 1.3rem;
+    }
+    .close-cart {
+      background: none;
+      border: none;
+      font-size: 1.6rem;
+      cursor: pointer;
+      color: #7f8c9a;
+    }
+    .cart-items {
+      flex: 1;
+      padding: 1rem 1.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .cart-item {
+      display: flex;
+      gap: 12px;
+      background: #fafbfe;
+      border-radius: 24px;
+      padding: 0.8rem;
+      align-items: center;
+      border: 1px solid #edf2f7;
+    }
+    .cart-item-img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 16px;
+      background: #eef2fa;
+    }
+    .cart-item-info {
+      flex: 1;
+    }
+    .cart-item-title {
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .cart-item-price {
+      font-size: 0.85rem;
+      color: #2c3e66;
+      font-weight: 600;
+    }
+    .cart-item-qty {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 6px;
+    }
+    .qty-btn {
+      background: #eef2ff;
+      border: none;
+      width: 26px;
+      height: 26px;
+      border-radius: 30px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .remove-item {
+      background: none;
+      border: none;
+      color: #e11d48;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-left: 5px;
+    }
+    .cart-footer {
+      padding: 1.5rem;
+      border-top: 1px solid #e9edf2;
+      background: white;
+    }
+    .total-price {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 800;
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .checkout-wa {
+      background: #25D366;
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 40px;
+      font-weight: 700;
+      font-size: 1rem;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .checkout-wa:hover {
+      background: #128C7E;
+      transform: scale(0.98);
+    }
+    .empty-cart {
+      text-align: center;
+      padding: 2rem;
+      color: #8698aa;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: #6c7e9e;
+      border-top: 1px solid #e2e8f0;
+      margin-top: 1rem;
+    }
+    .toast-msg {
+      position: fixed;
+      bottom: 25px;
+      left: 50%;
+      transform: translateX(-50%) scale(0.9);
+      background: #1f2b48;
+      color: white;
+      padding: 10px 24px;
+      border-radius: 60px;
+      font-size: 0.85rem;
+      z-index: 1200;
+      opacity: 0;
+      transition: 0.2s;
+      pointer-events: none;
+      white-space: nowrap;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .toast-msg.show {
+      opacity: 1;
+      transform: translateX(-50%) scale(1);
+    }
+    @media (max-width: 640px) {
+      .navbar {
+        padding: 1rem;
+      }
+      .banner-container {
+        padding: 1rem;
+      }
+      .container {
+        padding: 0 1rem;
+      }
+      .toast-msg {
+        white-space: normal;
+        width: 80%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="navbar">
+  <div class="nav-brand">
+    <span class="brand-name">PETROV GUNSHOP</span>
+    <span class="tag">premium essentials</span>
+  </div>
+  <div class="cart-icon" id="cartIconBtn">
+    <i class="fas fa-shopping-bag"></i> Keranjang
+    <span class="cart-count" id="cartCountBadge">0</span>
+  </div>
+</div>
+
+<!-- ========== BANNER PETROV SHOP - GAMBAR BISA DIGANTI SENDIRI ========== -->
+<div class="hero-banner">
+  <div class="banner-container">
+    <div class="custom-banner" id="petrovBanner">
+      <!-- Area gambar bisa diganti manual dengan mengedit gambar di sini atau melalui javascript -->
+      <img id="bannerImage" src="https://cdn.phototourl.com/free/2026-03-28-c261feb7-0ef7-4f30-9827-0e1476dd34cf.png" alt="Petrov Shop Banner" style="width:100%; border-radius:32px;">
+    </div>
+    <div style="text-align: center; margin-top: 12px;">
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="section-title">
+    <i class="fas fa-star-of-life"></i> 
+    <span>Koleksi Senjata Terbaru</span>
+  </div>
+  <div class="product-grid" id="productGrid"></div>
+</div>
+
+<footer>
+  <p>© 2026 Petrov Gunshop — Pesan via WhatsApp untuk layanan cepat</p>
+</footer>
+
+<!-- Cart Sidebar -->
+<div class="cart-overlay" id="cartOverlay">
+  <div class="cart-drawer">
+    <div class="cart-header">
+      <span><i class="fas fa-bag-shopping"></i> Keranjang Belanja</span>
+      <button class="close-cart" id="closeCartBtn"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="cart-items" id="cartItemsList">
+      <div class="empty-cart">Keranjang masih kosong</div>
+    </div>
+    <div class="cart-footer" id="cartFooter" style="display: none;">
+      <div class="total-price">
+        <span>Total</span>
+        <span id="cartTotalPrice">Rp 0</span>
+      </div>
+      <button class="checkout-wa" id="whatsappOrderBtn">
+        <i class="fab fa-whatsapp"></i> Order via WhatsApp
+      </button>
+    </div>
+  </div>
+</div>
+
+<div id="toastMsg" class="toast-msg">✨ Produk ditambahkan ke keranjang</div>
+
+<script>
+  // ========== DATA PRODUK ==========
+  const products = [
+    { id: 1, name: "Mossberg Shotgun", price: 35000000, desc: "Shotgun 12 Gauge Original", image: "https://cdn.phototourl.com/free/2026-03-28-4d0c4c65-e5d5-4e4b-b435-0face891f3af.jpg" },
+    { id: 2, name: "AKM Assault Rifle", price: 7000000, desc: "Made in Soviet AKM", image: "https://cdn.phototourl.com/free/2026-03-28-61bd1bdd-a625-42a2-b5ce-f805b4d3d0ef.jpg" },
+    { id: 3, name: "AR15 Assault Rifle", price: 15000000, desc: "Civilian Assault Rifle", image: "https://files.catbox.moe/bvkb41.jpg" },
+    { id: 4, name: "PKM Machine Gun", price: 9000000, desc: "Made in Soviet PKM", image: "https://files.catbox.moe/whv6su.jpg" },
+    { id: 5, name: "M82B Sniper Rifle", price: 255000000, desc: "Anti-materiel .50bmg sniper", image: "https://files.catbox.moe/7f2f6b.jpg" },
+    { id: 6, name: "MP5 Sub Machine Gun", price: 22000000, desc: "MP5 SMG Practice", image: "https://files.catbox.moe/au79z5.jpg" }
+  ];
+
+  let cart = [];
+
+  // DOM elements
+  const productGrid = document.getElementById('productGrid');
+  const cartOverlay = document.getElementById('cartOverlay');
+  const cartIconBtn = document.getElementById('cartIconBtn');
+  const closeCartBtn = document.getElementById('closeCartBtn');
+  const cartItemsList = document.getElementById('cartItemsList');
+  const cartFooter = document.getElementById('cartFooter');
+  const cartTotalPriceSpan = document.getElementById('cartTotalPrice');
+  const cartCountBadge = document.getElementById('cartCountBadge');
+  const whatsappBtn = document.getElementById('whatsappOrderBtn');
+  const toastMsgDiv = document.getElementById('toastMsg');
+
+  // Helper toast
+  function showToast(message, duration = 1700) {
+    toastMsgDiv.textContent = message || "✔️ Ditambahkan ke keranjang";
+    toastMsgDiv.classList.add('show');
+    setTimeout(() => toastMsgDiv.classList.remove('show'), duration);
+  }
+
+  // LocalStorage
+  function saveCart() {
+    localStorage.setItem('petrov_cart_v2', JSON.stringify(cart));
+  }
+
+  function loadCart() {
+    const stored = localStorage.getItem('petrov_cart_v2');
+    if (stored) {
+      try { cart = JSON.parse(stored); if (!Array.isArray(cart)) cart = []; } 
+      catch(e) { cart = []; }
+    } else { cart = []; }
+    renderCartUI();
+    updateCartBadge();
+  }
+
+  function updateCartBadge() {
+    const totalQty = cart.reduce((sum, item) => sum + item.quantity, 0);
+    cartCountBadge.innerText = totalQty;
+  }
+
+  function addToCart(productId) {
+    const existing = cart.find(item => item.id === productId);
+    if (existing) existing.quantity += 1;
+    else cart.push({ id: productId, quantity: 1 });
+    saveCart();
+    renderCartUI();
+    updateCartBadge();
+    const prod = products.find(p => p.id === productId);
+    showToast(` ${prod?.name || 'Produk'} ditambahkan`);
+  }
+
+  function updateQuantity(productId, delta) {
+    const idx = cart.findIndex(item => item.id === productId);
+    if (idx === -1) return;
+    const newQty = cart[idx].quantity + delta;
+    if (newQty <= 0) cart.splice(idx, 1);
+    else cart[idx].quantity = newQty;
+    saveCart();
+    renderCartUI();
+    updateCartBadge();
+  }
+
+  function removeItem(productId) {
+    cart = cart.filter(item => item.id !== productId);
+    saveCart();
+    renderCartUI();
+    updateCartBadge();
+    showToast("🗑 Item dihapus", 1200);
+  }
+
+  function renderCartUI() {
+    if (!cartItemsList) return;
+    if (cart.length === 0) {
+      cartItemsList.innerHTML = `<div class="empty-cart"><i class="fas fa-store"></i> <br/> Keranjang kosong, yuk belanja!</div>`;
+      cartFooter.style.display = "none";
+      return;
+    }
+    cartFooter.style.display = "block";
+    let itemsHtml = '';
+    let total = 0;
+
+    cart.forEach(cartItem => {
+      const product = products.find(p => p.id === cartItem.id);
+      if (!product) return;
+      const subtotal = product.price * cartItem.quantity;
+      total += subtotal;
+      itemsHtml += `
+        <div class="cart-item" data-id="${product.id}">
+          <img class="cart-item-img" src="${product.image}" alt="${product.name}">
+          <div class="cart-item-info">
+            <div class="cart-item-title">${product.name}</div>
+            <div class="cart-item-price">Rp ${product.price.toLocaleString()}</div>
+            <div class="cart-item-qty">
+              <button class="qty-btn" data-id="${product.id}" data-delta="-1">-</button>
+              <span style="min-width: 28px; text-align:center;">${cartItem.quantity}</span>
+              <button class="qty-btn" data-id="${product.id}" data-delta="+1">+</button>
+              <button class="remove-item" data-id="${product.id}"><i class="fas fa-trash-alt"></i></button>
+            </div>
+          </div>
+        </div>
+      `;
+    });
+    cartItemsList.innerHTML = itemsHtml;
+    cartTotalPriceSpan.innerText = `Rp ${total.toLocaleString()}`;
+
+    document.querySelectorAll('.qty-btn').forEach(btn => {
+      btn.removeEventListener('click', handleQty);
+      btn.addEventListener('click', handleQty);
+    });
+    document.querySelectorAll('.remove-item').forEach(btn => {
+      btn.removeEventListener('click', handleRemove);
+      btn.addEventListener('click', handleRemove);
+    });
+  }
+
+  function handleQty(e) {
+    const btn = e.currentTarget;
+    const id = parseInt(btn.getAttribute('data-id'));
+    const delta = parseInt(btn.getAttribute('data-delta'));
+    if (!isNaN(id) && !isNaN(delta)) updateQuantity(id, delta);
+  }
+  function handleRemove(e) {
+    const btn = e.currentTarget;
+    const id = parseInt(btn.getAttribute('data-id'));
+    if (!isNaN(id)) removeItem(id);
+  }
+
+  function renderProductGrid() {
+    if (!productGrid) return;
+    let html = '';
+    products.forEach(prod => {
+      html += `
+        <div class="product-card">
+          <img class="product-img" src="${prod.image}" alt="${prod.name}" loading="lazy">
+          <div class="product-info">
+            <div class="product-title">${prod.name}</div>
+            <div class="product-price">Rp ${prod.price.toLocaleString()}</div>
+            <div class="product-desc">${prod.desc}</div>
+            <button class="btn-add" data-id="${prod.id}">
+              <i class="fas fa-cart-plus"></i> Tambah ke keranjang
+            </button>
+          </div>
+        </div>
+      `;
+    });
+    productGrid.innerHTML = html;
+    document.querySelectorAll('.btn-add').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const id = parseInt(btn.getAttribute('data-id'));
+        if (!isNaN(id)) addToCart(id);
+      });
+    });
+  }
+
+  function generateWhatsAppMessage() {
+    if (cart.length === 0) return "";
+    let msg = "🛍️ *Petrov Shop Order*%0A";
+    let total = 0;
+    cart.forEach(cartItem => {
+      const prod = products.find(p => p.id === cartItem.id);
+      if (prod) {
+        const subtotal = prod.price * cartItem.quantity;
+        total += subtotal;
+        msg += `➡️ ${prod.name} x${cartItem.quantity} = Rp ${subtotal.toLocaleString()}%0A`;
+      }
+    });
+    msg += `%0A💰 *Total: Rp ${total.toLocaleString()}*%0A`;
+    msg += `%0A📦 Mohon konfirmasi alamat & metode pengiriman. Terima kasih!`;
+    return msg;
+  }
+
+  function checkoutWhatsApp() {
+    if (cart.length === 0) {
+      showToast("Keranjang masih kosong, tambahkan dulu!", 1500);
+      return;
+    }
+    const message = generateWhatsAppMessage();
+    const phone = "6289530204924"; 
+    const url = `https://wa.me/${phone}?text=${message}`;
+    window.open(url, '_blank');
+  }
+
+  function openCart() { cartOverlay.classList.add('active'); renderCartUI(); }
+  function closeCart() { cartOverlay.classList.remove('active'); }
+
+  function init() {
+    renderProductGrid();
+    loadCart();
+
+    cartIconBtn.addEventListener('click', openCart);
+    closeCartBtn.addEventListener('click', closeCart);
+    cartOverlay.addEventListener('click', (e) => { if (e.target === cartOverlay) closeCart(); });
+    whatsappBtn.addEventListener('click', checkoutWhatsApp);
+  }
+
+  init();
+</script>
+
+<!-- PETUNJUK BANNER: untuk mengganti gambar banner, cari element dengan id="bannerImage" lalu ubah atribut src-nya -->
+<!-- Contoh: document.getElementById('bannerImage').src = "nama_file_anda.jpg"; bisa juga langsung di HTML -->
+</body>
+</html>
